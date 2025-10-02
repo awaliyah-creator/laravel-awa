@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MyController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -94,3 +96,59 @@ Route::get('/nilai-ratarata', function () {
     ]);
 });
 
+//Test Model
+Route::get('test-model', function(){
+    //menampilkaan semua data dari model Post
+    $data = App\Models\Post::all();
+    return $data;
+});
+
+// tambah data
+Route::get('create-data-post', function(){
+    //membuat data baru melalui model
+    $data = App\Models\Post::create([
+        'title'=>'Belajar PHP-2',
+        'content'=>'Lorem Ipsum'
+    ]);
+    return $data;
+});
+
+Route::get('show-data/{id}', function ($id){
+    // menampilkan data berdasarkan parameter 'id'
+    $data = App\Models\Post::find($id);
+    return $data;
+});
+
+Route::get('edit-data/{id}', function($id){
+    // mengupdate data berdasarkan id
+    $data           = App\Models\Post::find($id);
+    $data->title    = "Membangun Project dengan Laravel";
+    $data->content  = "Ipsum Lorem";
+    $data->save();
+    return $data;
+});
+
+Route::get('delete-data/{id}', function($id){
+    // menghapus data berdasarkan parameter id
+    $data       = App\Models\Post::find($id);
+    $data->delete();
+    // di kembalikan ke halaman test model
+    return redirect('test-model');
+});
+
+Route::get('search/{cari}', function($query){
+    // mencari data berdasarkan title yang mirip seperti (like) .....
+    $data = App\Models\Post::where('title', 'like', '%' . $query . '%')->get();
+    return $data;
+});
+
+// pemanggilan url menggunakan controller
+//controller harus di import/di panggil
+Route::get('greetings',[MyController::class, 'hello']);
+Route::get('student', [MyController::class, 'siswa']);
+
+// post
+Route::get('post', [PostController::class, 'index']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Selamat Datang di Web App
+                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
