@@ -5,7 +5,7 @@
         <div class="col">
             <fieldset>
                 <legend>Data Posts</legend>
-                <a href="{{ route('post.create') }}"" class= "btn btn-sm btn-primary" style "align:float:right">
+                <a href="{{ route('post.create') }}" class= "btn btn-sm btn-primary" style "align:float:right">
                     Tambah Data
                 </a>
                 <div class="table-responsive py-2">
@@ -27,6 +27,9 @@
                                 @method('DELETE')
                                 <a href="{{ route('post.edit', $data->id) }}" class="btn btn-sm btn-success">
                                     Edit
+                                </a>
+                                <a href="{{ route('post.show', $data->id) }}" class="btn btn-sm btn-warning">
+                                    Show
                                 </a>
                                 <button type="submit" onclick="return confirm('Apakah Anda Yakin?')" class="btn btn-sm btn-danger">Delete
                                 </button>

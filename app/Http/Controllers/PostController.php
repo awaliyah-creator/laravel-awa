@@ -35,6 +35,16 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('post.index');
     }
+
+    //menampilkan data berdasarkan parameter  id
+    public function show($id)
+    {
+        // mencari data post berdasarkan parameter 'id'
+        $post = Post::findOrFail($id);
+        return view('post.show', compact('post'));
+    }
+
+    //menampilkan formulir data edit post
     public function edit($id)
     {
         // mencari data post berdasarkan parameter 'id'
