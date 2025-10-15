@@ -8,8 +8,8 @@ use App\Http\Controllers\RelasiController;
 use App\Models\Wali;
 use App\Models\Mahasiswa;
 use App\Models\Hobi;
-
-
+use App\Http\Controllers\DosenController;
+use App\Http\Controllers\HobiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -201,3 +201,7 @@ Route::get('/hobi/bola', function () {
 });
 
 Route::get('eloquent', [RelasiController::class, 'eloquent']);
+
+Route::resource('dosen', DosenController::class);
+
+Route::resource('hobi', HobiController::class);
